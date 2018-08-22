@@ -11,9 +11,25 @@ def connect_db():
       print ("Unable to establish connection to database")
 
 
+def connect_test_db():
+  """ Connect to test database """
+
+  db_details = "dbname='test_db' user='postgres' host='localhost' password='password'"
+  try:
+      return psycopg2.connect(db_details)
+  except:
+      print ("Unable to establish connection to database")
+
+
 def open_connection():
     """ Open connection to execute queries """
     conn = connect_db()
+    return conn
+
+
+def open_test_connection():
+    """ Open test_connection to execute queries """
+    conn = connect_test_db()
     return conn
 
 
@@ -21,5 +37,9 @@ def close_connection(conn):
     """ Close connection after executing queries """
     conn.commit()
     conn.close()
+
+
+
+
 
 

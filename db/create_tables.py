@@ -1,4 +1,4 @@
-from dbconfig import open_connection, close_connection
+from dbconfig import open_connection, close_connection, open_test_connection
 
 QUERIES = [
   """
@@ -6,7 +6,8 @@ QUERIES = [
           user_id SERIAL PRIMARY KEY NOT NULL,
           username VARCHAR NOT NULL,
           email VARCHAR NOT NULL,
-          password VARCHAR NOT NULL
+          password VARCHAR NOT NULL,
+          questions VARCHAR[]
 
           )
   """,
@@ -15,7 +16,8 @@ QUERIES = [
   CREATE TABLE IF NOT EXISTS questions(
           question_id SERIAL PRIMARY KEY NOT NULL,
           question_desc VARCHAR NOT NULL,
-          user_id INT REFERENCES users(user_id)
+          user_id INT REFERENCES users(user_id),
+          answers VARCHAR[]
           )
   """,
 
@@ -49,5 +51,34 @@ def create_tables():
     close_connection(conn)
 
 
+def create_test_tables():
+    """ Create tables for tests """
+    conn = open_test_connection()
+    cur = conn.cursor()
+
+    for query in QUERIES:
+        cur.execute(query)
+
+    cur.close()
+    close_connection(conn)
+
+
+def drop_test_tables():
+    """ Delete test database after running tests """
+
+    queries = [
+        'DROP table answers',
+        'DROP table questions',
+        'DROP table users',
+        'DROP table blacklist'
+    ]
+
+    conn = open_test_connection()
+    cur = conn.cursor()
+
+    for query in queries:
+        cur.execute(query)
+    cur.close()
+    close_connection(conn)
 
 
