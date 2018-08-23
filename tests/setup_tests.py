@@ -5,23 +5,23 @@ from stackoverflowlite import app
 
 
 class BaseTest(unittest.TestCase):
-    ''' Base test configurations '''
+    ''' Base configurations '''
     def setUp(self):
-        ''' Configuration settings before testing starts '''
+        ''' setup configurations '''
         create_tables.create_tables()
         self.client = app.test_client()
         self.client.testing = True
         self.user_data = {
-            "email": 'example@domain.com',
-            "username": 'Name',
-            "password": 'secret'
+            "email": 'mirrmaina@gmail.com',
+            "username": 'Mirriam',
+            "password": 'password'
         }
         self.question = {"description": "How do I use unittest?"}
         self.answer = {
             "answer": "This is how you do it"}
 
     def auth(self):
-        ''' Provide authorization token during testing '''
+        ''' Add token during testing '''
         user_info = dict(email='emily@gmail.com',
                          username='emily',
                          password='secret')

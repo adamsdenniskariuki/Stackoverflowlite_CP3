@@ -2,7 +2,7 @@ import psycopg2
 
 
 def connect_db():
-  '''Connect to main app database'''
+  '''Connect to database'''
 
   db_details = "dbname='stackoverflowlite' user='postgres' host='localhost' password='password'"
   try:
@@ -12,14 +12,14 @@ def connect_db():
 
 
 def open_connection():
-    """ Open connection to execute queries """
+    """ Open connection to run queries """
     conn = connect_db()
     print(conn)
     return conn
 
 
 def close_connection(conn):
-    """ Close connection after executing queries """
+    """ Close connection after queries """
     conn.commit()
     conn.close()
 

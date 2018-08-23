@@ -41,7 +41,7 @@ QUERIES = [
 
 
 def create_tables():
-    """ Create main app tables """
+    """ Create tables """
     conn = open_connection()
     cur = conn.cursor()
 
