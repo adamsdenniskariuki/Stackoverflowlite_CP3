@@ -9,8 +9,7 @@ email_format = r"(^[a-zA-z0-9_.]+@[a-zA-z0-9-]+\.[a-z]+$)"
 
 
 @api.route('/')
-@requires_auth
-def index(identity):
+def index():
     return jsonify({'message': 'Welcome to stackoverflowlite API'})
 
 
@@ -103,7 +102,7 @@ def post_answer(identity, question_id):
 
     if len(question) == 0:
         response = jsonify({"message": "Question not found"})
-        response.status_code = 400
+        response.status_code = 404
         return response
 
     answer_desc = request.get_json('answer')['answer']
@@ -117,9 +116,10 @@ def post_answer(identity, question_id):
         response.status_code = 400
         return response
 
-    cur.execute("select * from answers where question_id={} and user_id={}"
-                .format(question_id, identity))
+    cur.execute("select answer_desc from answers where answer_desc= '{}' and user_id={}"
+                .format(answer_desc, identity))
     answer_exists = cur.fetchall()
+    print(answer_exists)
     if answer_exists:
         response = jsonify({"message": " You have already provided that answer"})
         response.status_code = 409
