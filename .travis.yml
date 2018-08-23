@@ -10,6 +10,6 @@ before_script:
  - psql -c "CREATE DATABASE stackoverflowlite;" -U postgres
  - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 script:
-  - nosetests --with-coverage --cover-package=stackoverflowlite
+  - py.test --cov=stackoverflowlite tests/
 after_sucess:
   - coveralls
