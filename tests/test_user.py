@@ -7,8 +7,8 @@ class UserTestCase(BaseTest):
     
     def test_signup(self):
         ''' Should register a new user '''
-        user_info = dict(email='sonia@gmail.com',
-                         username='Sonia',
+        user_info = dict(email='emily@gmail.com',
+                         username='emily',
                          password='Very_secret')
         result = self.client.post('/api/v1/signup',
                                   data=json.dumps(user_info),
@@ -17,8 +17,14 @@ class UserTestCase(BaseTest):
 
     def test_email_exists(self):
         ''' Should not register user with an already existing email '''
+        user_info = dict(email='emily@gmail.com',
+                         username='emily',
+                         password='Very_secret')
+        self.client.post('/api/v1/signup',
+                                  data=json.dumps(user_info),
+                                  content_type='application/json')
         result = self.client.post('/api/v1/signup',
-                                  data=json.dumps(self.user_data),
+                                  data=json.dumps(user_info),
                                   content_type='application/json')
         self.assertEqual(result.status_code, 409)
 
