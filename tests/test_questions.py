@@ -44,15 +44,6 @@ class questionTestCase(BaseTest):
 
         self.assertEqual(req.status_code, 400)
 
-    def test_question_format(self):
-        token = self.auth()
-        req = self.client.post('/api/v1/questions',
-                               headers=dict(Authorization=token),
-                               content_type='application/not_json',
-                               data=json.dumps(self.question)
-                               )
-        self.assertEqual(req.status_code, 400)
-
     def test_get_question(self):
         ''' Should view an existing question '''
         token = self.auth()
