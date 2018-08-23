@@ -10,6 +10,6 @@ class Blacklist(object):
 
         conn = open_connection()
         cur = conn.cursor()
-        cur.execute("insert into blacklist (token) values('{}')".format(token.encode('ascii', 'ignore')))
+        cur.execute("insert into blacklist (token) values('{}')".format(token))
         cur.close()
         close_connection(conn)
