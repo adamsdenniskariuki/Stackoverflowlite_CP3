@@ -14,6 +14,7 @@ def connect_db():
 def open_connection():
     """ Open connection to execute queries """
     conn = connect_db()
+    print(conn)
     return conn
 
 
