@@ -92,9 +92,9 @@ def login():
 @requires_auth
 def logout(identity):
     ''' Route for logging out '''
-    token = request.headers['Authorization'].encode('ascii', 'ignore')
+    token = request.headers['Authorization']
 
-    Blacklist(str(token))
+    Blacklist(token)
 
     response = jsonify({
         "Message": "Account logged out"
