@@ -1,4 +1,4 @@
-from dbconfig import open_connection, close_connection
+from db.dbconfig import open_connection, close_connection
 
 QUERIES = [
   """
