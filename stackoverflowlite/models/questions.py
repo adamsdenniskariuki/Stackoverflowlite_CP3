@@ -1,6 +1,6 @@
 ''' import modules'''
 from uuid import uuid4
-from db.dbconfig import open_connection,close_connection
+from db.dbconfig import open_connection, close_connection
 
 
 class Question(object):
@@ -13,7 +13,7 @@ class Question(object):
         cur = conn.cursor()
         cur.execute("insert into questions(question_desc) values('{}')".format(question_desc))
         cur.close()
-        close_connection(conn)
+        conn.commit()
 
 
 class Answer(object):
@@ -25,4 +25,4 @@ class Answer(object):
         conn = open_connection()
         cur = conn.cursor()
         cur.execute("insert into answers(answer_desc) values('{}')".format(answer_desc))
-        close_connection(conn)
+        conn.commit()

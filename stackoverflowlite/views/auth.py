@@ -31,7 +31,9 @@ def sign_up():
         return response
 
     if not re.match(email_format, email):
-        return jsonify({"message": "incorrect email format"})
+        response = jsonify({"message": "incorrect email format"})
+        response.status_code = 400
+        return response
 
     if not password or password == " ":
         response = jsonify({"message": "Password not provided"})
