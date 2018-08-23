@@ -5,11 +5,11 @@ python:
 services:
  - postgresql
 install:
-    - pip install -r requirements.txt
+    - pip install -r requirements.txt.txt
 before_script:
  - psql -c "CREATE DATABASE stackoverflowlite;" -U postgres
  - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 script:
-  - pytest --cov=stackoverflowlite
+  - nosetests --with-coverage --cover-package=stackoverflowlite
 after_sucess:
   - coveralls
