@@ -6,7 +6,7 @@ install:
     - pip install -r requirements.txt
 before_script:
  - psql -c "CREATE DATABASE stackoverflowlite;" -U postgres
- - psql -c "CREATE USER postgres WITH PASSWORD 'passwprd';" -U postgres
+ - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
 script:
   - nosetests --with-coverage --cover-package=stackoverflowlite
   - coveralls
