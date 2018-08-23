@@ -1,10 +1,10 @@
 from tests.setup_tests import BaseTest
 
 
-class RoutesTestCase(BaseTest):
+class EndpointTestCase(BaseTest):
     ''' API routes test suite '''
 
-    def test_base_route(self):
+    def test_index_endpoint(self):
         ''' Base route should work '''
         req = self.client.get('/api/v1/')
 

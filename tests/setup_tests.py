@@ -36,7 +36,6 @@ class BaseTest(unittest.TestCase):
                                   content_type='application/json')
 
         user_jwt = json.loads(result.data.decode("utf-8"))['token']
-        print(user_jwt)
         return user_jwt
 
     def tearDown(self):

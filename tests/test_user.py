@@ -63,8 +63,18 @@ class UserTestCase(BaseTest):
                                   data=json.dumps(user_info),
                                   content_type='application/json')
         self.assertEqual(result.status_code, 200)
-    
-    #def test_email_format_login(self):
+
+    def test_email_format_signup(self):
+        ''' Should not register user with invalid email '''
+        user_info = {
+            "email": 'domain.com',
+            "username": 'JohnDoe',
+            "password": 'Very_secret'
+        }
+        result = self.client.post('/api/v1/signup',
+                                  data=json.dumps(user_info),
+                                  content_type='application/json')
+        self.assertEqual(result.status_code, 400)
 
     def test_incorrect_email_login(self):
         ''' Should not login user using wrong email '''
@@ -96,6 +106,17 @@ class UserTestCase(BaseTest):
                                   }),
                                   content_type='application/json')
 
+        self.assertEqual(result.status_code, 400)
+
+    def test_email_format_login(self):
+        ''' Should not register user with invalid email '''
+        user_info = {
+            "email": 'domain.com',
+            "password": 'Very_secret'
+        }
+        result = self.client.post('/api/v1/login',
+                                  data=json.dumps(user_info),
+                                  content_type='application/json')
         self.assertEqual(result.status_code, 400)
 
     def test_user_logout(self):
