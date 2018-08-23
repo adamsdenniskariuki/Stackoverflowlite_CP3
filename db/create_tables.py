@@ -1,4 +1,4 @@
-from dbconfig import open_connection, close_connection, open_test_connection
+from dbconfig import open_connection, close_connection
 
 QUERIES = [
   """
@@ -51,34 +51,23 @@ def create_tables():
     close_connection(conn)
 
 
-def create_test_tables():
-    """ Create tables for tests """
-    conn = open_test_connection()
-    cur = conn.cursor()
-
-    for query in QUERIES:
-        cur.execute(query)
-
-    cur.close()
-    close_connection(conn)
-
-
-def drop_test_tables():
-    """ Delete test database after running tests """
+def drop_tables():
+    """ Delete tables after tests """
 
     queries = [
-        'DROP table answers',
-        'DROP table questions',
-        'DROP table users',
-        'DROP table blacklist'
+        'DROP table users CASCADE',
+        'DROP table questions CASCADE',
+        'DROP table answers CASCADE',
+        'DROP table blacklist CASCADE'
     ]
 
-    conn = open_test_connection()
+    conn = open_connection()
     cur = conn.cursor()
 
     for query in queries:
         cur.execute(query)
+
     cur.close()
-    close_connection(conn)
+    conn.commit()
 
 
