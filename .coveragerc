@@ -6,10 +6,9 @@ omit =
 
 [report]
 omit =
-  app/error.py
+
   venv/*
   */python?.?/*
   __init__.py
-  migrations/*
-  postman/*
+  db/*
   tests/
