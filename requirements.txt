@@ -16,13 +16,11 @@ docopt==0.6.2
 enum34==1.1.6
 Flask==1.0.2
 funcsigs==1.0.2
-functools32==3.2.3.post2
 idna==2.7
 ipaddress==1.0.22
 isort==4.3.4
 itsdangerous==0.24
 Jinja2==2.10
-jsonschema==2.6.0
 lazy-object-proxy==1.3.1
 MarkupSafe==1.0
 mccabe==0.6.1
@@ -49,3 +47,4 @@ urllib3==1.23
 waitress==1.1.0
 Werkzeug==0.14.1
 wrapt==1.10.11
+
