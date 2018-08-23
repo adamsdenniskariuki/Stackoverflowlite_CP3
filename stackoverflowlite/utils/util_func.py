@@ -18,7 +18,7 @@ def requires_auth(func):
             response.status_code = 401
             return response
         
-        jwt_token = request.headers['Authorization'].encode('ascii', 'ignore')
+        jwt_token = request.headers['Authorization']
         conn = open_connection()
         cur = conn.cursor()
         cur.execute("select token from blacklist where token = '{}'".format(jwt_token))

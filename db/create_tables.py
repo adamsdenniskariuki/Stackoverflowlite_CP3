@@ -1,4 +1,4 @@
-from dbconfig import open_connection, close_connection
+from db.dbconfig import open_connection, close_connection
 
 QUERIES = [
   """
@@ -6,7 +6,8 @@ QUERIES = [
           user_id SERIAL PRIMARY KEY NOT NULL,
           username VARCHAR NOT NULL,
           email VARCHAR NOT NULL,
-          password VARCHAR NOT NULL
+          password VARCHAR NOT NULL,
+          questions VARCHAR[]
 
           )
   """,
@@ -15,7 +16,8 @@ QUERIES = [
   CREATE TABLE IF NOT EXISTS questions(
           question_id SERIAL PRIMARY KEY NOT NULL,
           question_desc VARCHAR NOT NULL,
-          user_id INT REFERENCES users(user_id)
+          user_id INT REFERENCES users(user_id),
+          answers VARCHAR[]
           )
   """,
 
@@ -39,7 +41,7 @@ QUERIES = [
 
 
 def create_tables():
-    """ Create main app tables """
+    """ Create tables """
     conn = open_connection()
     cur = conn.cursor()
 
@@ -48,6 +50,25 @@ def create_tables():
 
     close_connection(conn)
 
+
+def drop_tables():
+    """ Delete tables after tests """
+
+    queries = [
+        'DROP table users CASCADE',
+        'DROP table questions CASCADE',
+        'DROP table answers CASCADE',
+        'DROP table blacklist CASCADE'
+    ]
+
+    conn = open_connection()
+    cur = conn.cursor()
+
+    for query in queries:
+        cur.execute(query)
+
+    cur.close()
+    conn.commit()
 
 
 

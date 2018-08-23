@@ -31,7 +31,9 @@ def sign_up():
         return response
 
     if not re.match(email_format, email):
-        return jsonify({"message": "incorrect email format"})
+        response = jsonify({"message": "incorrect email format"})
+        response.status_code = 400
+        return response
 
     if not password or password == " ":
         response = jsonify({"message": "Password not provided"})
@@ -90,9 +92,9 @@ def login():
 @requires_auth
 def logout(identity):
     ''' Route for logging out '''
-    token = request.headers['Authorization'].encode('ascii', 'ignore')
+    token = request.headers['Authorization']
 
-    Blacklist(str(token))
+    Blacklist(token)
 
     response = jsonify({
         "Message": "Account logged out"

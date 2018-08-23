@@ -20,7 +20,7 @@ class User(object):
         cur.execute("SELECT * from users WHERE email='{}'".format(self.email))
         user = cur.fetchone()
         cur.close()
-        close_connection(conn)
+        conn.commit()
         return user
 
     def user_info(self):
@@ -58,10 +58,11 @@ class User(object):
             cur = conn.cursor()
             cur.execute("INSERT INTO users (username, email, password) VALUES('{}', '{}', '{}')"
                         .format(username, self.email, hashed_pw))
-            user_id = cur.execute("select user_id from users where email = '{}' ".format(self.email))
+            cur.execute("select user_id from users where email = '{}' ".format(self.email))
+            user_id = cur.fetchone()[0]
             token = self.generate_jwt(user_id)
             cur.close()
-            close_connection(conn)
+            conn.commit()
 
             user_info = self.user_info()
             response = jsonify({
