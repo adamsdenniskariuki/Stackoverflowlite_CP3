@@ -37,7 +37,7 @@ def questions(identity):
             return response
 
         if not request.json:
-            response = jsonify({"message": "incorrect format"})
+            response = jsonify({"message": "Incorrect request format"})
             response.status_code = 400
             return response
 
